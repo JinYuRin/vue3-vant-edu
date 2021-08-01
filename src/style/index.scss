@@ -1,0 +1,5 @@
+//@import是css的引入写法
+//@import也有使用url('./base')的引入写法,但是小程序不支持
+@import './base';
+@import "inconfont.css";
+

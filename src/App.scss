@@ -1,0 +1,263 @@
+//<!--可以把css理解成一个应用程序:
+//每个css属性的赋值可以看成是调用api给属性赋值
+//如果能传不同的多个参数时就是重载函数
+//固定参数值就是枚举型display: flex;
+//有特定的几种属性都被同种属性影响,可以理解成多个函数将同个变量修改了产生联合或者冲突了
+//scss的&写法不依赖于具体的html层级，依赖于class命名，这就需要coder做到容易理解对应的命名
+//而scss的.class{.class{}}写法是依赖html层级的
+//-->
+//@import "./style/viriables";
+//@import "./style/mixins";
+
+//.docker {
+//  color: $content-fontcolor;
+//  display: flex;
+//  /*内部元素采用flex布局一种弹性自适应布局,默认是row行内布局*/
+//  box-sizing: border-box;
+//  /*box-sizing顾名思义就是盒模型的大小，border-box以border边为大小,宽度和高度将包含
+//  内边距和边框的的宽度，content-box将高宽只给与实际内容框，内边距和边框会另外绘制
+//  所以整体高度就只有0.49rem
+//  */
+//  position: absolute;
+//  /*position位置的定义absolute在一个页面的绝对位置 需要配合LRTB方位使用
+//  定位标准为文档流，如果预留位置给他将能有tarbar的效果
+//  fixed定位标准为浏览器窗口，无论文档流什么位置如果滑动页面始终在窗口内显示
+//  只有relative不脱离文档流，针对正常的位置进行调整
+//  ps:float也会脱离文档流，但是其他元素进行渲染的时候会给他留足够位置
+//  */
+//  left: 0;
+//  /*left::0 加上宽度100%就可以完成占领整个屏幕宽度*/
+//  bottom: 0;
+//  /*设置定位元素下 外 边 距 边 界 与其包含块下边界之间*/
+//  padding: 0 .18rem;
+//  /*padding其实是一个重载函数，参数数量决定函数 两个参数是水平和左右的padding*/
+//  width: 100%;
+//  height: .49rem;
+//  /*0.49rem=49px,因为设定了base.scss*/
+//  border-top: .01rem solid #f1f1f1;
+//  /*solid是虚线1px颜色#f1f1f1  */
+//  /*background-color: green;*/
+//  &__item {
+//    /*flex布局下的flex:1是等份分布的意思  */
+//    flex: 1;
+//    /*设置text-align在水平线上的布局*/
+//    text-align: center;
+//    /*样式是会叠加的,且这里采用了scss的写法，将只定义docker__item下的iconfont*/
+//    .iconfont {
+//      font-size: .2rem;
+//      /*margin和padding的参数顺序为上右下左或垂直和水平*/
+//      margin: .07rem 0 .02rem 0;
+//    }
+//
+//    &--active {
+//      color: #1fa4fc;
+//    }
+//  }
+//
+//  &__title {
+//    /*浏览器默认最小的字体12px,但是我需要10px*/
+//    font-size: .2rem;
+//    /*scale(0.5,0.5)这个函数将横向和纵向都缩放一定的比率*/
+//    transform: scale(0.5, 0.5);
+//    /*缩放函数还要加用缩放中心transform-origin为中心的顶部*/
+//    transform-origin: center top;
+//  }
+//}
+
+//.wrapper {
+//  overflow: auto;
+//  box-sizing: border-box;
+//  color: $content-fontcolor;
+//  position: absolute;
+//  left: 0;
+//  top: 0;
+//  right: 0;
+//  width: 100%;
+//  bottom: .5rem;
+//  padding: 0 .18rem;
+//
+//  .position {
+//    padding: .16rem 0;
+//    margin-right: .24rem;
+//    line-height: .22rem;
+//    font-size: .16rem;
+//    @include ellipsis;
+//    /*overflow: hidden;*/
+//    /*!*内容溢出时处理方案 hidden 隐藏 scroll滚动，但是文字仍然会换行*/
+//    /*  因为并没有设定高度，所以自动换行，高度由内容决定*/
+//    /**!*/
+//    /*white-space: nowrap;*/
+//    /*!*white-space: nowrap拒绝换行，导致height被限制了所以overflow: hidden才显效*!*/
+//    /*text-overflow: ellipsis;*/
+//    /*!*ellipsis文字溢出的策略给省略号*/
+//    /*clip修剪文本或者String给定字符串代替*/
+//    /**!*/
+//    /*px优先级可能大于rem所以最好统一使用rem，
+//    同层样式类优先级不确定，要用.position__icon
+//    而不是&__icon{}
+//    编译成.position .position__icon优先级更高
+//    */
+//    .position__icon {
+//      position: relative;
+//      /*<!--top: -0.01rem;-->*/
+//      font-size: .2rem;
+//    }
+//
+//    .position__notice {
+//      /*文字会重叠图标是因为这个已经脱离文档流了*/
+//      position: absolute;
+//      float: right;
+//      top: .17rem;
+//      right: .18rem;
+//      font-size: .2rem;
+//    }
+//  }
+//
+//  .search {
+//    margin-bottom: .12rem;
+//    padding: 0 .25rem;
+//    line-height: .32rem;
+//    background: #F5F5F5;
+//    border-radius: .16rem;
+//    color: #B7B7B7;
+//
+//    &__icon {
+//      display: inline-block;
+//      //我们来验证一下，inline-block和block的区别
+//      margin-right: .1rem;
+//      font-size: .16rem;
+//    }
+//
+//    &__text {
+//      display: inline-block;
+//      font-size: .14rem;
+//    }
+//  }
+//
+//  .banner {
+//    height: 0;
+//    overflow: hidden;
+//    //margin: 0 .2rem;
+//    padding-bottom: .86rem;
+//
+//    .banner__img {
+//      width: 3.39rem;
+//      height: .86rem;
+//    }
+//  }
+//
+//  .icons {
+//    margin: .08rem 0;
+//    display: flex;
+//    flex-wrap: wrap;
+//    //justify-content: center;
+//    justify-items: center;
+//
+//    &__item {
+//      //height: .46rem;
+//      //width: .48rem;
+//      width: 20%; //直接利用比例来限定就行了
+//      padding: .1rem 0;
+//      display: flex;
+//      flex-direction: column;
+//      align-items: center;
+//      //align-items应该是内容内部的水平还是整体的水平？去看阮一峰的课程
+//      &__img {
+//        width: .4rem;
+//        height: .4rem;
+//      }
+//
+//      &__desc {
+//        //text-align: center;我采用了flex布局所以可以不用
+//        margin: .07rem 0 0 0;
+//        color: $content-fontcolor;
+//      }
+//    }
+//
+//  }
+//
+//  .gap {
+//    margin: .12rem -0.18rem;
+//    height: .1rem;
+//    //background可以是颜色也可以是图片
+//    background: #F1F1F1;
+//  }
+//
+//  .nearby {
+//
+//    &__title {
+//      margin: .16rem 0 -.1rem 0;
+//      font-size: .18rem;
+//      font-weight: normal;
+//      color: $content-fontcolor;
+//    }
+//
+//    &__item {
+//      margin-top: .25rem;
+//      display: flex;
+//      //还是要用flex布局，玛德span的内联元素只适用于文件
+//      &__img {
+//        width: .56rem;
+//        height: .56rem;
+//      }
+//
+//      &__content {
+//        margin-left: .16rem;
+//
+//        &__title {
+//          font-size: .16rem;
+//          margin-bottom: .08rem;
+//        }
+//
+//        &__tags {
+//          line-height: .18rem;
+//          margin-bottom: .12rem;
+//
+//          &__tag {
+//            font-size: .13rem;
+//            margin-right: .16rem;
+//
+//          }
+//        }
+//
+//        &__highlight {
+//          color: #E93B3B;
+//          font-size: .13rem;
+//        }
+//
+//      }
+//    }
+//
+//  }
+//  .space{
+//    height: .15rem;
+//    //color: #F1F1F1;
+//  }
+//}
+
+/*.docker__item {*/
+/*  !*flex布局下的flex:1是等份分布的意思  *!*/
+/*  flex: 1;*/
+/*  !*设置text-align在水平线上的布局*!*/
+/*  text-align: center;*/
+/*  !*样式是会叠加的,且这里采用了scss的写法，将只定义docker__item下的iconfont*!*/
+/*  .iconfont {*/
+/*    font-size: .2rem;*/
+/*    !*margin和padding的参数顺序为上右下左或垂直和水平*!*/
+/*    margin: .07rem 0 .02rem 0;*/
+/*  }*/
+/*}*/
+
+/*.docker__title {*/
+/*  !*浏览器默认最小的字体12px*!*/
+/*  font-size: 20px;*/
+/*  !*scale(0.5,0.5)这个函数将横向和纵向都缩放一定的比率*!*/
+/*  transform: scale(0.5, 0.5);*/
+/*  !*缩放函数还要加用缩放中心transform-origin为中心的顶部*!*/
+/*  transform-origin: center top;*/
+/*}*/
+
+/*.docker__item--active {*/
+/*  color: #1fa4fc;*/
+/*}*/
+

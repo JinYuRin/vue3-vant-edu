@@ -1,0 +1,20 @@
+//scss支持并拓展css语法
+//制作混入的样式，和直接引用css文件不同，混入可以使用类似对象的变量来混入
+@mixin ellipsis{
+  overflow: hidden;
+  /*内容溢出时处理方案 hidden 隐藏 scroll滚动，但是文字仍然会换行
+    因为并没有设定高度，所以自动换行，高度由内容决定
+  */
+  white-space: nowrap;
+  /*white-space: nowrap拒绝换行，导致height被限制了所以overflow: hidden才显效*/
+  text-overflow: ellipsis;
+  /*ellipsis文字溢出的策略给省略号
+  clip修剪文本或者String给定字符串代替
+  */
+}
+@mixin centerInWindow{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

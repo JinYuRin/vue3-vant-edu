@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'iconfont';  /* project id 2305083 */
+    src: url('//at.alicdn.com/t/font_2305083_qgbhxb1xmud.eot');
+    src: url('//at.alicdn.com/t/font_2305083_qgbhxb1xmud.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_2305083_qgbhxb1xmud.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_2305083_qgbhxb1xmud.woff') format('woff'),
+    url('//at.alicdn.com/t/font_2305083_qgbhxb1xmud.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_2305083_qgbhxb1xmud.svg#iconfont') format('svg');
+}
+
+/*
+这上面url是存放在本地的文件，需要一直存着文件
+图标本质是字体font
+*/
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 20px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+使用伪类:before制作icon图标
+*/
+.iconfont__home:before {
+    content: "\eb1b";
+}
+
+.iconfont__cart:before {
+    content: '\e619'
+}
+
+.iconfont__order:before {
+    content: '\e636'
+}
+
+.iconfont__my:before {
+    content: '\e600'
+}
+.iconfont__search:before {
+    content: '\e62d'
+}
