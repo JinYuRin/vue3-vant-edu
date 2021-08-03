@@ -1,4 +1,4 @@
-# jingdong
+# 鲤龙教育WebApp
 
 ## Project setup
 ```
