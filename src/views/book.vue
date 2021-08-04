@@ -11,21 +11,23 @@
         background-size: cover;
       "
     >
-      <!-- 添加class或者style都会丢到组件的最外层 -->
-      <van-card class="book-card" thumb="https://img.yzcdn.cn/vant/ipad.jpeg">
+      <!-- 添加class|style|id都会丢到组件的最外层 -->
+      <van-card id="book-card">
         <template #title>
           <div
             class="font-weight-bold pb-2"
             style="font-size: 33rem; line-height: 1.3"
           >
-            解锁前端面试体系核心攻略32讲义
+            {{ headers.title }}
           </div>
         </template>
-        <!-- 仔细检查发现.van-card__thumb宽度是决定了size的,所以才解决了问题 -->
+        <!-- 仔细检查发现.van-card__thumb宽度是决定了size的,所以才解决了问题
+            如果要使用样式穿透，最好了解一下目标组件的属性对样式的影响
+         -->
         <template #thumb>
           <van-image
             style="width: 100%; height: 100%"
-            src="http://lencent.top/public/lilong/cover3.png"
+            :src="headers.img"
             fit="contain"
           />
         </template>
@@ -35,7 +37,7 @@
               class="p-1 mb-1 rounded text-muted font"
               style="background-color: rgba(0, 0, 0, 0.03)"
             >
-              拉开你与普通面试者的差距
+              {{ headers.desc }}
             </div>
             <div class="p-1 font-sm text-muted flex align-center">
               <van-image
@@ -43,9 +45,9 @@
                 round
                 width="40rem"
                 height="40rem"
-                src="https://img.yzcdn.cn/vant/cat.jpeg"
+                :src="headers.author.avatar"
               />
-              瑾瑜·腾讯前端工程师
+              {{ headers.author.name }}·{{ headers.author.identity }}
             </div>
           </div>
         </template>
@@ -53,15 +55,20 @@
           <div
             class="text-left font-sm text-light-muted py-3 flex align-center"
           >
-            共计30节 · 已更新31节 | 1011人已订阅
+            共计{{ headers.totalPart }}节 · 已更新{{ headers.latestPart }}节 ·
+            {{ headers.subscribes }}人已订阅
             <span class="ml-auto"
-              >收藏<span><van-icon name="like-o" /></span
+              >收藏<span
+                ><van-icon
+                  :name="headers.isFav ? 'like' : 'like-o'"
+                  :color="headers.isFav ? 'red' : ''" /></span
             ></span>
           </div>
         </template>
       </van-card>
     </div>
     <van-tabs
+      id="tabs"
       v-model:active="activeName"
       :line-width="'20rem'"
       title-active-color="#3388ff"
@@ -69,7 +76,7 @@
       <van-tab title="详情" name="a">
         <div class="mt-1 px-5">
           <div class="font-md font-weight-bold py-2">课程亮点：</div>
-          <ul class="pl-3">
+          <ul id="feats" class="pl-3">
             <li class="font">内容全面，涵盖初中级前端进阶必备知识</li>
             <li class="font">掌握分布式高可用、高并发、分布式设计精髓</li>
             <li class="font">大厂架构师自身HR、带你了解面试套路</li>
@@ -84,14 +91,14 @@
         </div>
         <div class="mt-2 px-5">
           <div class="font-md font-weight-bold py-2">适合人群</div>
-          <ul class="pl-3">
+          <ul id="customers" class="pl-3">
             <li class="font">想要学习前端的在校学生</li>
             <li class="font">不想要学习前端的在校学生</li>
           </ul>
         </div>
         <div class="mt-2 px-5">
           <div class="font-md font-weight-bold py-2">购买须知：</div>
-          <ol class="pl-3">
+          <ol id="tips" class="pl-3">
             <li class="font" type="1">
               本专栏为图文形式内容服务，共计 32 小节
             </li>
@@ -135,6 +142,7 @@
 </template>
 
 <script>
+import { get } from "vant/lib/utils";
 // *vantUI提供的外部样式属性，类似于小程序的外部样式类,有部分属于全局组件样式(虽然仅限van-config-provider内)
 const themeVars = {
   "submit-bar-price-color": "#3388ff",
@@ -145,10 +153,47 @@ const themeVars = {
   "card-thumb-size": "230rem",
   "tabs-bottom-bar-color": "#37F",
 };
+// 模拟从后台拿到数据
+// 非响应式对象就不要使用ref和reactive了
+const bookDetailEffect = () => {
+  // 还会有一些异步方法,怕踩坑可以不用写async,尝试写then吧
+  let bookDetail = {
+    headers: {
+      img: "http://lencent.top/public/lilong/cover3.png",
+      title: "解锁前端面试体系核心攻略32讲义",
+      desc: "拉开你与普通面试者的差距",
+      author: {
+        avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+        name: "瑾瑜",
+        identity: "腾讯前端工程师 ",
+      },
+      isFav: true,
+      subscribes: 1011,
+      totalPart: 30,
+      latestPart: 29,
+    },
+    body: {
+      detail: {},
+      catalogue: {},
+      comments: {},
+    },
+    footer: {
+      price: 68,
+      isBought: false,
+    },
+  };
+  const getBookDetail = () => bookDetail;
+  return { getBookDetail };
+};
+
+// 定义从后台获取专栏详情的方法
 export default {
+  // 通过setup函数的参数可以获得vue的许多相关api
   setup() {
+    const { getBookDetail } = bookDetailEffect();
     return {
       themeVars,
+      headers: getBookDetail().headers,
     };
   },
 };
@@ -167,20 +212,16 @@ export default {
   top: 26%;
 }
 /* 以下样式类属于vantUI提供的组件的样式,如需穿透,必须取消scope或者将UI组件二次封装 或者采用选择器精确选择以免影响到其他页面的样式 */
-div.book-card a.van-card__thumb {
+/* 实在麻烦就干脆在本页面根元素div.class进行子代选择 */
+/* 使用id选择器选择了元素之后再选择子代和后代,尝试自由组合选择器吧*/
+#book-card a.van-card__thumb {
   height: 100% !important;
   margin-right: 30rem;
 }
-
-/* 需要采用选择器精确选择以免影响到其他页面的样式  */
-
-div.van-tab {
+#tabs div.van-tab {
   position: relative;
 }
-
-/* 需要采用选择器精确选择以免影响到其他页面的样式  */
-/* 实在麻烦就干脆在本页面根元素div.class进行子代选择 */
-div.van-tabs__nav {
+#tabs div.van-tabs__nav {
   padding-left: 80rem !important;
   padding-right: 80rem !important;
 }
@@ -194,15 +235,20 @@ div.van-tabs__nav {
 
 /* 需要采用选择器精确选择以免影响到其他页面的样式  */
 
-ul {
+#feats,
+#customers {
   line-height: 1.6 !important;
 }
-/* 这是后代选择器 不要用>>>————————要用> */
-ul > li {
+/* 这是子元素选择器 不要用>>>————————要用> */
+/* 还有兄弟元素选择器，第几个元素选择器，第几个特定的元素选择器 我靠，好丰富啊 */
+/* 子代选择器的子代不能使用div.class进行选择???还是父元素不能用div.class */
+/* 这样吧，以后子代选择器使用id或者元素 */
+#feats,
+#customers > li {
   list-style-type: disc !important;
   line-height: 2 !important;
 }
-ol > li {
+#tips > li {
   list-style-type: decimal !important;
   line-height: 2 !important;
 }
