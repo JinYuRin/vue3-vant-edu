@@ -117,7 +117,12 @@
           >
             <h2 class="zhang-title text-blue mb-3">{{ zhang.zhangName }}</h2>
             <div class="jies-wrapper p-2 rounded">
-              <div class="jie mb-2" v-for="jie in zhang.jies" :key="jie.index">
+              <div
+                class="jie mb-2"
+                v-for="jie in zhang.jies"
+                :key="jie.index"
+                @click="toBookReading"
+              >
                 <div class="jie-title font text-muted">
                   {{ jie.title }}
                 </div>
@@ -172,6 +177,7 @@
 
 <script>
 import { get } from "vant/lib/utils";
+import { useRouter } from "vue-router";
 // *vantUI提供的外部样式属性，类似于小程序的外部样式类,有部分属于全局组件样式(虽然仅限van-config-provider内)
 const themeVars = {
   "submit-bar-price-color": "#3388ff",
@@ -248,10 +254,17 @@ export default {
   // 通过setup函数的参数可以获得vue的许多相关api
   setup() {
     const { getBookDetail } = bookDetailEffect();
+    // 像这种vue相关的方法，可以在外面定义，但必须在内部调用
+    const router = useRouter();
+    // 跳转方法
+    const toBookReading = () => {
+      router.push({ name: "BookReading" });
+    };
     return {
       themeVars,
       headers: getBookDetail().headers,
       body: getBookDetail().body,
+      toBookReading,
     };
   },
 };

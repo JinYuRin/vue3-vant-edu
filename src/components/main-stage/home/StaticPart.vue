@@ -1,5 +1,5 @@
 <template>
-  <van-config-provider :theme-vars="themeVars" style="padding-bottom: 110rem">
+  <van-config-provider :theme-vars="themeVars" style="margin-bottom: 100rem">
     <!-- 搜索栏 -->
     <van-search
       shape="round"
