@@ -50,7 +50,6 @@
         class="flex flex-column flex-1 ml-1 p-2 rounded-lg"
         style="height: 100%; background-color: #fffaf2"
       >
-        <!-- color="" -->
         <div class="font-md font-weight-bold mb-1">实战课</div>
         <div class="font-sm" style="color: orange">快速上手提升开发技能</div>
         <div
@@ -94,6 +93,7 @@
     <van-swipe lazy-render :loop="false">
       <van-swipe-item style="height: 100%" v-for="i in 2" :key="i">
         <van-card
+          @click="toVideoDetail"
           style="margin-left: -30rem"
           v-for="i in 4"
           :key="i"
@@ -234,7 +234,10 @@ export default {
     const toBookDetail = () => {
       router.push({ name: "Book" });
     };
-    return { swiperList, themeVars, toBookDetail };
+    const toVideoDetail = () => {
+      router.push({ name: "Video" });
+    };
+    return { swiperList, themeVars, toBookDetail, toVideoDetail };
   },
 };
 </script>
