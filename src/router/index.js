@@ -75,6 +75,13 @@ const router = createRouter({
 
 //  全局的路由守卫
 router.beforeEach((to, from, next) => {
+  // 每次路由跳转前都回到顶部
+  document.body.scrollTop = 0
+  // firefox
+  document.documentElement.scrollTop = 0
+  // safari
+  window.pageYOffset = 0
+  next()
   const {
     isLogin
   } = localStorage
