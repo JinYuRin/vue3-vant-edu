@@ -3,12 +3,12 @@
   根据报错信息翻转使用router-view和transition，证明router-view是用component实现的
   TODO：你需要解决如何在同个页面里有两个v-if的组件会报动画过渡警告的问题
   -->
-  <router-view/>
-<!--  <router-view v-slot="{ Component }">-->
-<!--    <transition name="n">-->
-<!--      <component :is="Component"/>-->
-<!--    </transition>-->
-<!--  </router-view>-->
+  <router-view />
+  <!--  <router-view v-slot="{ Component }">-->
+  <!--    <transition name="n">-->
+  <!--      <component :is="Component"/>-->
+  <!--    </transition>-->
+  <!--  </router-view>-->
 </template>
 <style lang="scss" scoped>
 /*@import "App";*/
@@ -37,9 +37,10 @@
 // import Home from './components/main-stage/home/Home'
 // import MainStage from './views/MainStage'
 // import Login from './views/Login'
-import { toRefs } from 'vue'
-import { useStore } from 'vuex'
-// import { useRouter } from 'vue-router'
+import { toRefs } from "vue";
+import { useStore } from "vuex";
+// import { useRouter } from "vue-router";
+// import { useRoute } from "vue-router";
 
 export default {
   components: {
@@ -48,16 +49,18 @@ export default {
     // Login,
     // MainStage
   },
-  setup () {
-    // console.log(useRouter())
+  setup() {
+    // console.log(useRouter());
+    // console.log(useRoute());
+    // const route = useRoute();
     // console.log(useStore().state.isLogon)
-    const store = useStore()
+    const store = useStore();
     // console.log(store.state.isLogon)
-    const { isLogon } = toRefs(store.state)
+    const { isLogon } = toRefs(store.state);
     //  toRefs和toRef都是解构目标并做成响应式对象
     return {
-      isLogon
-    }
-  }
-}
+      isLogon,
+    };
+  },
+};
 </script>

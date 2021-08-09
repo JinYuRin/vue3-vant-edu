@@ -1,19 +1,29 @@
 <template>
   <van-tabbar v-model="active">
-    <van-tabbar-item name="home" icon="home-o">首页</van-tabbar-item>
-    <van-tabbar-item name="search" icon="apps-o">分类</van-tabbar-item>
-    <van-tabbar-item name="friends" icon="desktop-o">学习</van-tabbar-item>
-    <van-tabbar-item name="setting" icon="user-o">我的</van-tabbar-item>
+    <!-- TODO:激活的tabbar-item要从路由里获取记录到store后加载到这里来 -->
+    <van-tabbar-item to="/" name="/" icon="home-o">首页</van-tabbar-item>
+    <van-tabbar-item to="/category" name="/category" icon="apps-o"
+      >分类</van-tabbar-item
+    >
+    <van-tabbar-item to="/study" name="/study" icon="desktop-o"
+      >学习</van-tabbar-item
+    >
+    <van-tabbar-item to="/mine" name="/mine" icon="user-o"
+      >我的</van-tabbar-item
+    >
   </van-tabbar>
 </template>
 
 <script>
-import { ref } from "vue";
+// 可以computed一下路由信息直接获取路由地址
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 
 export default {
   name: "Docker",
   setup() {
-    const active = ref("home");
+    const active = computed(() => useRoute().path);
+    // const route = computed(() => useRoute().path.slice(1));
     return { active };
   },
 };

@@ -50,7 +50,26 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ '../views/MainStage.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/MainStage.vue'),
+    children: [{
+        path: 'category',
+        name: 'Category',
+        component: () => import('../components/main-stage/category/Category.vue'),
+      }, {
+        path: 'study',
+        name: 'Study',
+        component: () => import('../components/main-stage/study/Study.vue'),
+      }, {
+        path: 'mine',
+        name: 'Mine',
+        component: () => import('../components/main-stage/mine/Mine.vue'),
+      },
+      { // TODO：问题就来了，直接进入子路由也会触发父路由的路由守卫吗，如果不会该怎么办
+        path: '', // 子路由会自动补齐路由
+        name: 'Home',
+        component: () => import('../components/main-stage/home/Home.vue'),
+      }
+    ],
   }, {
     path: '/book',
     name: 'Book',

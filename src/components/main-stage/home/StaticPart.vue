@@ -90,42 +90,45 @@
         更多<van-icon name="arrow" />
       </div>
     </div>
-    <van-swipe lazy-render :loop="false">
-      <van-swipe-item style="height: 100%" v-for="i in 2" :key="i">
-        <van-card
-          @click="toVideoDetail"
-          style="margin-left: -30rem"
-          v-for="i in 4"
-          :key="i"
-          class="position-relative"
-          price="348"
-          title="2021年必学 2小时带你极速入门CSS"
-        >
-          <!-- 注意这里的插槽用法 -->
-          <template #thumb>
-            <van-image
-              style="width: 100%; height: 100%"
-              src="http://lencent.top/public/lilong/cover2.png"
-              fit="contain"
-            />
-          </template>
-          <template #tags>
-            <div class="mt-1">
-              <van-tag class="mr-1" text-color="#f7f8f9">林瑾瑜</van-tag>
-              <van-tag color="white" text-color="black">高级</van-tag>
-            </div>
-          </template>
-          <template #footer>
-            <div
-              class="position-absolute font-sm text-light-muted"
-              style="bottom: 25rem; right: 35rem"
-            >
-              1457人学习
-            </div>
-          </template>
-        </van-card>
-      </van-swipe-item>
-    </van-swipe>
+    <div class="pr-2 pb-2 pt-1">
+      <van-swipe lazy-render :loop="false" :width="380">
+        <van-swipe-item style="height: 100%" v-for="i in 2" :key="i">
+          <van-card
+            @click="toVideoDetail"
+            style="padding: 0 0"
+            v-for="i in 4"
+            :key="i"
+            class="position-relative"
+            price="348"
+            title="必学 2小时带你极速入门CSS"
+          >
+            <!-- 注意这里的插槽用法 -->
+            <template #thumb>
+              <van-image
+                style="width: 100%; height: 100%"
+                src="http://lencent.top/public/lilong/cover2.png"
+                fit="contain"
+              />
+            </template>
+            <template #tags>
+              <div class="mt-1">
+                <van-tag class="mr-1" text-color="#f7f8f9">林瑾瑜</van-tag>
+                <van-tag color="white" text-color="black">高级</van-tag>
+              </div>
+            </template>
+            <template #footer>
+              <div
+                class="position-absolute font-sm text-light-muted"
+                style="bottom: 25rem; right: 35rem"
+              >
+                1457人学习
+              </div>
+            </template>
+          </van-card>
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+
     <!-- 分割线 -->
     <div class="f-divider"></div>
     <!--鲤龙专栏swiper -->
@@ -145,47 +148,50 @@
         更多<van-icon name="arrow" />
       </div>
     </div>
-    <van-swipe lazy-render :loop="false">
-      <van-swipe-item style="height: 100%" v-for="i in 2" :key="i">
-        <van-card
-          @click="toBookDetail"
-          style="margin-left: -30rem"
-          v-for="i in 4"
-          :key="i"
-          class="position-relative"
-          price="348"
-          title="2021年必学 2小时带你极速入门CSS"
-        >
-          <!-- 注意这里的插槽用法 -->
-          <template #thumb>
-            <van-image
-              style="width: 100%; height: 100%"
-              src="http://lencent.top/public/lilong/cover2.png"
-              fit="contain"
-            />
-          </template>
-          <template #tags>
-            <div class="mt-1">
-              <van-tag class="mr-1" text-color="#f7f8f9">林瑾瑜</van-tag>
-              <van-tag color="white" text-color="black">高级</van-tag>
-            </div>
-          </template>
-          <template #footer>
-            <div
-              class="position-absolute font-sm text-light-muted"
-              style="bottom: 25rem; right: 35rem"
-            >
-              1457人学习
-            </div>
-          </template>
-        </van-card>
-      </van-swipe-item>
-    </van-swipe>
+    <div class="pr-2 pb-2 pt-1">
+      <van-swipe lazy-render :loop="false" :width="380">
+        <van-swipe-item style="height: 100%" v-for="i in 2" :key="i">
+          <van-card
+            @click="toBookDetail"
+            style="margin-left: -30rem"
+            v-for="i in 4"
+            :key="i"
+            class="position-relative"
+            price="348"
+            title="必学 2小时带你极速入门CSS"
+          >
+            <!-- 注意这里的插槽用法 -->
+            <template #thumb>
+              <van-image
+                style="width: 100%; height: 100%"
+                src="http://lencent.top/public/lilong/cover2.png"
+                fit="contain"
+              />
+            </template>
+            <template #tags>
+              <div class="mt-1">
+                <van-tag class="mr-1" text-color="#f7f8f9">林瑾瑜</van-tag>
+                <van-tag color="white" text-color="black">高级</van-tag>
+              </div>
+            </template>
+            <template #footer>
+              <div
+                class="position-absolute font-sm text-light-muted"
+                style="bottom: 25rem; right: 35rem"
+              >
+                1457人学习
+              </div>
+            </template>
+          </van-card>
+        </van-swipe-item>
+      </van-swipe>
+    </div>
   </van-config-provider>
 </template>
 
 <script>
 import { useRouter } from "vue-router";
+import { ref } from "vue";
 // 样式变量
 const themeVars = {
   buttonPrimaryBorderColor: "#07c160",
@@ -228,6 +234,11 @@ export default {
   name: "StaticPart",
   // 这是不需要适用响应式对象的场景
   setup() {
+    const index = ref(-1);
+    const change = (id) => {
+      console.log(id);
+      index.value = id;
+    };
     // 像这种vue相关的方法，可以在外面定义，但必须在内部调用
     const router = useRouter();
     // 跳转方法
@@ -237,7 +248,14 @@ export default {
     const toVideoDetail = () => {
       router.push({ name: "Video" });
     };
-    return { swiperList, themeVars, toBookDetail, toVideoDetail };
+    return {
+      swiperList,
+      themeVars,
+      toBookDetail,
+      toVideoDetail,
+      change,
+      index,
+    };
   },
 };
 </script>
