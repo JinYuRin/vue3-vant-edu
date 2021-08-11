@@ -1,10 +1,61 @@
 <!--  -->
 <template>
-  <div>我的</div>
+  <div class="page bg-light px-4 py-5">
+    <div class="header flex align-center">
+      <van-image
+        round
+        width="130rem"
+        height="130rem"
+        src="http://lencent.top/public/lilong/avatar.jpg"
+      />
+      <div class="ml-5 h-100 flex flex-column">
+        <div class="font-md my-2">就是瑾瑜啊</div>
+        <div class="font-sm text-muted">学习时长217小时</div>
+      </div>
+    </div>
+    <div class="flex align-center justify-between py-5 px-5 font-sm text-muted">
+      <div>粉丝&nbsp;0</div>
+      <div>关注&nbsp;1</div>
+      <div>积分&nbsp;9</div>
+    </div>
+    <van-config-provider :theme-vars="themeVars"
+      ><van-cell-group :inset="true">
+        <van-cell title="购物车" value="内容" />
+      </van-cell-group>
+      <van-cell-group :inset="true" class="mt-3">
+        <van-cell title="我的订单" value="内容" />
+        <van-cell title="我的余额" value="内容" />
+        <van-cell title="电子兑换码" value="内容" />
+        <van-cell title="我的优惠券" value="内容" />
+        <van-cell title="我的拼团" value="内容" />
+      </van-cell-group>
+      <van-cell-group :inset="true" class="mt-3">
+        <van-cell title="意见反馈" value="内容" />
+        <van-cell title="常见问题" value="内容" />
+        <van-cell title="设置" value="内容" />
+      </van-cell-group>
+    </van-config-provider>
+  </div>
 </template>
 
 <script>
-export default {};
+const themeVars = {
+  "cell-group-inset-padding": "0 0",
+  // vanCardTitleLineHeight: "20px",
+};
+export default {
+  setup() {
+    return {
+      themeVars,
+    };
+  },
+};
 </script>
 <style scoped>
+.page {
+  height: 1500rem;
+}
+.header {
+  height: 130rem;
+}
 </style>

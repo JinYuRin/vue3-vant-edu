@@ -53,13 +53,19 @@ export default {
     // console.log(useRouter());
     // console.log(useRoute());
     // const route = useRoute();
-    // console.log(useStore().state.isLogon)
+    // console.log(useStore())
     const store = useStore();
-    // console.log(store.state.isLogon)
+    // console.log(store);
     const { isLogon } = toRefs(store.state);
     //  toRefs和toRef都是解构目标并做成响应式对象
     return {
       isLogon,
+      // vuex在组件中的使用
+      // name: computed(() => store.state.name),
+      // age: computed(() => store.getters.changeAge),
+      // changeName: (name) => store.commit("changeName", name), // 使用mutation方法的函数
+      // getProducts: () => store.dispatch("getProducts"), // 调用actions函数的方法
+      // products: computed(() => store.state.products),
     };
   },
 };

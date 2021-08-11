@@ -97,7 +97,7 @@
           v-for="i in 4"
           :key="i"
           price="348"
-          title="必学 2小时带你极速入门CSS"
+          title="2021必学 2小时带你极速入门CSS"
         >
           <!-- 注意这里的插槽用法 -->
           <template #thumb>
@@ -151,7 +151,7 @@
           v-for="i in 4"
           :key="i"
           price="348"
-          title="必学 2小时带你极速入门CSS"
+          title="2021必学 2小时带你极速入门CSS"
         >
           <!-- 注意这里的插槽用法 -->
           <template #thumb>
