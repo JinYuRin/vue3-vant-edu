@@ -18,21 +18,26 @@
       <div>关注&nbsp;1</div>
       <div>积分&nbsp;9</div>
     </div>
-    <van-config-provider :theme-vars="themeVars"
+    <van-config-provider id="function-ports" :theme-vars="themeVars"
       ><van-cell-group :inset="true">
-        <van-cell title="购物车" value="内容" />
+        <van-cell
+          title="购物车"
+          icon="shopping-cart-o"
+          is-link
+          arrow-direction
+        />
       </van-cell-group>
       <van-cell-group :inset="true" class="mt-3">
-        <van-cell title="我的订单" value="内容" />
-        <van-cell title="我的余额" value="内容" />
-        <van-cell title="电子兑换码" value="内容" />
-        <van-cell title="我的优惠券" value="内容" />
-        <van-cell title="我的拼团" value="内容" />
+        <van-cell icon="orders-o" is-link arrow-direction title="我的订单" />
+        <van-cell icon="gold-coin-o" is-link arrow-direction title="我的余额" />
+        <van-cell icon="exchange" is-link arrow-direction title="电子兑换码" />
+        <van-cell icon="coupon-o" is-link arrow-direction title="我的优惠券" />
+        <van-cell icon="friends-o" is-link arrow-direction title="我的拼团" />
       </van-cell-group>
       <van-cell-group :inset="true" class="mt-3">
-        <van-cell title="意见反馈" value="内容" />
-        <van-cell title="常见问题" value="内容" />
-        <van-cell title="设置" value="内容" />
+        <van-cell icon="info-o" is-link arrow-direction title="意见反馈" />
+        <van-cell icon="question-o" is-link arrow-direction title="常见问题" />
+        <van-cell icon="setting-o" is-link arrow-direction title="设置" />
       </van-cell-group>
     </van-config-provider>
   </div>
@@ -51,9 +56,13 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
+#function-ports .van-cell__left-icon {
+  margin-right: 20rem;
+}
 .page {
-  height: 1500rem;
+  /* height: 80vh; */
+  min-height: 90vh;
 }
 .header {
   height: 130rem;

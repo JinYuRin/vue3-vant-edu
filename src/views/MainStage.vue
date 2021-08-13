@@ -1,8 +1,9 @@
 <template>
-  <div class="MainStage">
+  <div class="MainStage flex flex-column">
     <!--使用transition标签做动画过渡的必须是是单一根节点的-->
     <!-- <Home/> -->
     <router-view />
+    <div class="placeholder w-100" />
     <Docker />
   </div>
 </template>
@@ -22,4 +23,10 @@ export default {
 </script>
 
 <style scoped>
+.MainStage {
+  height: 100vh;
+}
+.placeholder {
+  height: 50px;
+}
 </style>
