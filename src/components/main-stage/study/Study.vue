@@ -4,6 +4,7 @@
     <div class="function-ports rounded-lg px-2 py-3 bg-white">
       <van-config-provider :theme-vars="themeVars">
         <van-grid :border="false" :column-num="5">
+          <!-- hover如果不消失就要使用到active了 -->
           <van-grid-item
             v-for="port in functionPorts"
             :key="port.id"
@@ -25,6 +26,7 @@
 <script>
 const themeVars = {
   "grid-item-content-padding": "0 0",
+  // "grid-item-content-active-color": "#f2f3f5",
   // "grid-item-content-active-color": "",
 };
 export default {
@@ -54,11 +56,17 @@ export default {
     0 4px 8px 0 rgba(43, 51, 59, 0.1), 0 8px 16px 0 rgba(43, 51, 59, 0.1),
     0 12px 24px 0 rgba(43, 51, 59, 0.1); */
 }
-/* .function-ports .van-grid-item__content:hover {
-  background-color: #f8f9fa;
+/* .function-ports .van-grid-item:active {
+  background-color: #f2f3f5;
 } */
+/* active点击到释放,hover光标悬浮,link未访问的连接,visited已访问的连接 */
+.function-ports .van-grid-item__content:active {
+  background-color: #f8f9fa;
+}
 /* 找不到下载的icon 翻转该icon */
+/* 查这个i标签是什么来头 */
 #back-top i {
+  /* 以图片正中心为旋转点翻转180deg度 */
   transform: rotate(180deg);
 }
 </style>

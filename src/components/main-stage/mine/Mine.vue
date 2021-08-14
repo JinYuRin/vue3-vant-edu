@@ -32,7 +32,13 @@
         <van-cell icon="gold-coin-o" is-link arrow-direction title="我的余额" />
         <van-cell icon="exchange" is-link arrow-direction title="电子兑换码" />
         <van-cell icon="coupon-o" is-link arrow-direction title="我的优惠券" />
-        <van-cell icon="friends-o" is-link arrow-direction title="我的拼团" />
+        <van-cell
+          id="myGroup"
+          icon="friends-o"
+          is-link
+          arrow-direction
+          title="我的拼团"
+        />
       </van-cell-group>
       <van-cell-group :inset="true" class="mt-3">
         <van-cell icon="info-o" is-link arrow-direction title="意见反馈" />
@@ -46,6 +52,7 @@
 <script>
 const themeVars = {
   "cell-group-inset-padding": "0 0",
+  "cell-active-color": "none",
   // vanCardTitleLineHeight: "20px",
 };
 export default {
@@ -59,6 +66,10 @@ export default {
 <style>
 #function-ports .van-cell__left-icon {
   margin-right: 20rem;
+}
+/* 直接抓到某个伪类的icon进行Y轴翻转 */
+#myGroup .van-icon-friends-o::before {
+  transform: rotateY(180deg);
 }
 .page {
   /* height: 80vh; */

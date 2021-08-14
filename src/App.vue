@@ -60,7 +60,7 @@ export default {
     //  toRefs和toRef都是解构目标并做成响应式对象
     return {
       isLogon,
-      // vuex在组件中的使用
+      // !vuex在组件中的使用
       // name: computed(() => store.state.name),
       // age: computed(() => store.getters.changeAge),
       // changeName: (name) => store.commit("changeName", name), // 使用mutation方法的函数
