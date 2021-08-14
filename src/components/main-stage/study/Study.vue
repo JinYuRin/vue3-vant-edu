@@ -17,8 +17,13 @@
     </div>
     <div class="my-5 flex justify-between w-100">
       <!-- 尝试使用css选择器选择第二个span类型的元素 -->
-      <div class="font">我的课程 我的专栏</div>
-      <div class="font">全部</div>
+      <div class="font">
+        <span class="mr-3">我的课程</span>
+        <span class="text-light-muted">我的专栏</span>
+      </div>
+      <div class="font text-light-muted">
+        <span class="mr-1">全部</span><van-icon name="filter-o" />
+      </div>
     </div>
   </div>
 </template>

@@ -92,39 +92,9 @@
     </div>
     <van-swipe lazy-render :loop="false">
       <van-swipe-item style="height: 100%" v-for="i in 2" :key="i">
-        <van-card
-          @click="toVideoDetail"
-          v-for="i in 4"
-          :key="i"
-          price="348"
-          title="2021必学 2小时带你极速入门CSS"
-        >
-          <!-- 注意这里的插槽用法 -->
-          <template #thumb>
-            <van-image
-              style="width: 100%; height: 100%"
-              src="http://lencent.top/public/lilong/cover2.png"
-              fit="contain"
-            />
-          </template>
-          <template #tags>
-            <div class="mt-1">
-              <van-tag class="mr-1" text-color="#f7f8f9">林瑾瑜</van-tag>
-              <van-tag color="white" text-color="black">高级</van-tag>
-            </div>
-          </template>
-          <template #footer>
-            <div
-              class="position-absolute font-sm text-light-muted"
-              style="bottom: 25rem; right: 35rem"
-            >
-              1457人学习
-            </div>
-          </template>
-        </van-card>
+        <course-card @cardClick="toVideoDetail" v-for="i in 4" :key="i" />
       </van-swipe-item>
     </van-swipe>
-
     <!-- 分割线 -->
     <div class="f-divider"></div>
     <!--鲤龙专栏swiper -->
@@ -183,7 +153,8 @@
 
 <script>
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { isVNode, ref } from "vue";
+import courseCard from "@/components/common/course-card.vue";
 // 样式变量
 const themeVars = {
   buttonPrimaryBorderColor: "#07c160",
@@ -225,6 +196,7 @@ const swiperList = [
 ];
 export default {
   name: "StaticPart",
+  components: { courseCard },
   // 这是不需要适用响应式对象的场景
   setup() {
     const index = ref(-1);
