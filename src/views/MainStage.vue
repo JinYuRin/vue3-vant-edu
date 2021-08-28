@@ -27,6 +27,7 @@ export default {
   height: 100vh;
 }
 .placeholder {
-  height: 50px;
+  /* 麻蛋，全局变量还能被我用的??? */
+  height: var(--van-tabbar-height);
 }
 </style>

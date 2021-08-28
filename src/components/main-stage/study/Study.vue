@@ -68,6 +68,10 @@ export default {
 .function-ports .van-grid-item__content:active {
   background-color: #f8f9fa;
 }
+/* element+element 所有紧接着的第一个选择所有紧跟在 <div> 元素之后的第一个 <p> 元素 */
+.function-ports .van-grid-item__icon + .van-grid-item__text {
+  margin-top: 8rem;
+}
 /* 找不到下载的icon 翻转该icon */
 /* 查这个i标签是什么来头 */
 #back-top i {

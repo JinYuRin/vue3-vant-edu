@@ -7,23 +7,30 @@
     placeholder="vue · react · node.js"
   />
   <!-- TODO在手机端上出现问题，需要解决可能需要参照小程序的布局 -->
-  <div class="category flex-1 flex">
-    <van-sidebar id="sidebar" v-model="active">
-      <van-sidebar-item
-        v-for="(cate, index) in cateList"
-        :key="index"
-        :title="cate"
-      />
-    </van-sidebar>
-    <div class="p-3">
-      <van-grid :border="false" :column-num="3">
-        <van-grid-item
-          v-for="value in 4"
-          :key="value"
-          icon="wechat"
-          text="微信开发"
+  <div class="category flex-1 position-relative">
+    <!-- 固定布局的骚操作,直接给flex-1然后子元素就 absolute-->
+    <!-- 本来想利用align-str的 -->
+    <div
+      class="flex"
+      style="position: absolute; left: 0; right: 0; top: 0; bottom: 0"
+    >
+      <van-sidebar id="sidebar" v-model="active">
+        <van-sidebar-item
+          v-for="(cate, index) in cateList"
+          :key="index"
+          :title="cate"
         />
-      </van-grid>
+      </van-sidebar>
+      <div class="p-3">
+        <van-grid :border="false" :column-num="3">
+          <van-grid-item
+            v-for="value in 4"
+            :key="value"
+            icon="wechat"
+            text="微信开发"
+          />
+        </van-grid>
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +65,7 @@ export default {
 #sidebar {
   background-color: #f7f8fa;
   width: 220rem;
-  /* height: 90%; */
+  height: 100%;
 }
 #sidebar .van-sidebar-item--select {
   color: #ee0a24;
