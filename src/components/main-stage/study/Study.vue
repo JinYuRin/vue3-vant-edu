@@ -1,4 +1,4 @@
-<!--  -->
+<!--   -->
 <template>
   <div class="page bg-light px-4 py-5">
     <div class="function-ports rounded-lg px-2 py-3 bg-white">
@@ -25,18 +25,25 @@
         <span class="mr-1">全部</span><van-icon name="filter-o" />
       </div>
     </div>
+    <course-card @cardClick="toVideoDetail" v-for="i in 4" :key="i" />
   </div>
 </template>
 
 <script>
+import { useRouter } from "vue-router";
+import courseCard from "@/components/common/course-card.vue";
 const themeVars = {
   "grid-item-content-padding": "0 0",
   // "grid-item-content-active-color": "#f2f3f5",
   // "grid-item-content-active-color": "",
 };
 export default {
+  components: { courseCard },
   setup() {
     return {
+      toVideoDetail: () => {
+        useRouter().push({ name: "Video" });
+      },
       themeVars,
       functionPorts: [
         { icon: "like-o", text: "收藏", id: 0 },
